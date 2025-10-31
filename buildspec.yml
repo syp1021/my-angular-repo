@@ -12,11 +12,13 @@ phases:
     commands:
       - ng build -c production 
       - echo "Build completed"
+      - echo "Dist folder content:"
+      - ls dist
     finally:
       - echo This is the finally block execution!
 artifacts:
   base-directory: dist/my-angular-project
   files:
-    - 'dist/my-angular-project/**/*'
-    - appspec.yml
-    - 'deploy-scripts/**/*'
+    - '**/*'                  # base-directory 안 모든 파일
+    - '../appspec.yml'        # base-directory 밖 파일은 상대경로
+    - '../deploy-scripts/**/*'
