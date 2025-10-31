@@ -16,9 +16,11 @@ phases:
       - ls dist
     finally:
       - echo This is the finally block execution!
+
 artifacts:
-  base-directory: dist/my-angular-project
+  # base-directory를 루트로 잡아서 appspec.yml과 deploy-scripts도 포함
+  base-directory: .
   files:
-    - '**/*'                  # base-directory 안 모든 파일
-    - '../appspec.yml'        # base-directory 밖 파일은 상대경로
-    - '../deploy-scripts/**/*'
+    - 'dist/my-angular-project/**/*'  # 빌드 결과
+    - 'appspec.yml'                   # CodeDeploy AppSpec
+    - 'deploy-scripts/**/*'           # 배포 스크립트
